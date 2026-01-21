@@ -45,4 +45,4 @@ spec:
           mountPath: /var/www/html
       volumes:                   # <-- volumes belong at the pod spec level
       - name: wp-data
-          emptyDir: {}
+        emptyDir: {}
