@@ -1,28 +1,28 @@
 apiVersion: apps/v1
 kind: Deployment
-metadata: 
+metadata:
   name: wordpress-frontend
   namespace: wordpress-ns
-  labels: 
+  labels:
     app: wordpress-site
     env: prod
-spec: 
+spec:
   replicas: 2
   selector:
     matchLabels:
       app: wordpress-site
-  template: 
+  template:
     metadata:
       labels:
         app: wordpress-site
     spec:
-      container:
-        - name: wordpress
-          image: wordpress:latest
-          imagePullPolicy: Always
-          ports:
-          - containerPort: 80
-      env:
+      containers:                # <-- must be plural
+      - name: wordpress
+        image: wordpress:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        env:                     # <-- env belongs inside the container
         - name: WORDPRESS_DB_HOST
           value: your-rds-endpoint.rds.amazonaws.com:3306
         - name: WORDPRESS_DB_NAME
@@ -40,12 +40,9 @@ spec:
             secretKeyRef:
               name: wp-db-secret
               key: db_passwd
-      volumeMounts: 
+        volumeMounts:            # <-- also inside the container
         - name: wp-data
           mountPath: /var/www/html
-    volumes: 
+      volumes:                   # <-- volumes belong at the pod spec level
       - name: wp-data
-        emptyDir: {}
-
-
-    
+          emptyDir: {}
