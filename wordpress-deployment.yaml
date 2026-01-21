@@ -1,8 +1,8 @@
 apiVersion: apps/V1
 kind: Deployment
+namespace: wordpress-ns
 metadata: 
   name: wordpress-frontend
-  namespace: wordpress-ns
   labels: 
     app: wordpress-site
     env: prod
