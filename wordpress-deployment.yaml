@@ -24,7 +24,7 @@ spec:
         - containerPort: 80
         env:                     # <-- env belongs inside the container
         - name: WORDPRESS_DB_HOST
-          value: your-rds-endpoint.rds.amazonaws.com:3306
+          value: wordpress-k8.c83ka6w04m8j.us-east-1.rds.amazonaws.com:3306
         - name: WORDPRESS_DB_NAME
           valueFrom:
             secretKeyRef:
