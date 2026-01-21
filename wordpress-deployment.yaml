@@ -1,5 +1,5 @@
 apiVersion: apps/V1
-kind: deployment
+kind: Deployment
 metadata: 
   name: wordpress-frontend
   namespace: wordpress-ns
